@@ -48,7 +48,7 @@ public class LoginTests {
 }
 
 /*
-* https://nlosisimplifiedautomation.vercel.app is confusing.
+* https://ndosisimplifiedautomation.vercel.app is confusing.
 * Is it using pages?
 * I'm organising my locators by pages
 * Yet things look like /#overview, /#practice, /#dashboard
@@ -57,5 +57,4 @@ public class LoginTests {
 * Asserts are hard to understand.
 * I was typing in assert and I didn't see a problem in the IDE.
 * I had to google to find testNG asserts until I found I should have used Assert.
-* 
 * */
