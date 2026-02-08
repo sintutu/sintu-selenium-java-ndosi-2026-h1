@@ -1,48 +1,31 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import pages.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LoginTests {
-    // Declare private driver instance
-    private WebDriver driver;
-
-    private final String baseUri = "https://ndosisimplifiedautomation.vercel.app/";
-
-    // Home page locators
-    private final By homePageHeading = By.xpath("//h1[contains(.,'Master Test Automation')]");
-    private final By homeLoginButton = By.xpath("//button[contains(.,'Login')]");
-
-    // Practice page locators
-    private final By loginEmail = By.id("login-email");
-    private final String username = "sintutu@dev.com";
-    private final By loginPassword = By.id("login-password");
-    private final String password = "@987654321";
-    private final By loginButton = By.id("login-submit");
-
-    // Dashboard page locators
-    private final By dashboardWelcomeMessage = By.xpath("//h2[contains(.,'Welcome back, sintutu! \uD83D\uDC4B')]");
-    // Emojis are UTF-8 compliant
-
-
+public class LoginTests extends TestBase {
     @Test
     public void logIntoNdosiDevSite() throws InterruptedException {
+
+        HomePage homePage = new HomePage();
+        PracticePage practicePage = new PracticePage();
+        DashboardPage dashboardPage = new DashboardPage();
+
         // Instantiate driver. But why in the test?
         driver = new ChromeDriver();
         driver.navigate().to(baseUri); // driver.get(baseUri) would work. What's navigate() for?
         driver.manage().window().maximize(); // what's the manage interface for?
         Assert.assertEquals(
-                driver.findElement((homePageHeading)).getText(),
+                driver.findElement((homePage.heading)).getText(),
                 "Master Test Automation");
-        driver.findElement(homeLoginButton).click();
+        driver.findElement(homePage.loginButton).click();
         Assert.assertEquals(driver.getCurrentUrl(), baseUri + "#practice");
-        driver.findElement(loginEmail).sendKeys(username);
-        driver.findElement(loginPassword).sendKeys(password);
-        driver.findElement(loginButton).click();
+        driver.findElement(practicePage.loginEmail).sendKeys(practicePage.username);
+        driver.findElement(practicePage.loginPassword).sendKeys(practicePage.password);
+        driver.findElement(practicePage.loginButton).click();
         Thread.sleep(1000); // Added a wait. Didn't feel like adding a Wait.
         Assert.assertEquals(
-                driver.findElement(dashboardWelcomeMessage).getText(),
+                driver.findElement(dashboardPage.welcomeMessage).getText(),
                 "Welcome back, sintutu! \uD83D\uDC4B");
     }
 }
