@@ -1,21 +1,24 @@
+package facade;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.DashboardPage;
 import pages.HomePage;
 import pages.PracticePage;
 
 import java.time.Duration;
 
-public class ApplicationUnderTest {
+public class NdosiDev {
     WebDriver driver;
     WebDriverWait wait;
 
     private final String baseUri = "https://ndosisimplifiedautomation.vercel.app/";
 
-    public ApplicationUnderTest(){
+    public NdosiDev(){
         // Initialise driver and wait
         driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         // Get the application running
         driver.manage().window().maximize();
@@ -30,5 +33,10 @@ public class ApplicationUnderTest {
         practicePage.enterUsername();
         practicePage.enterPassword();
         practicePage.clickLogin();
+    }
+
+    public void seeDashboard(){
+        DashboardPage dashboardPage = new DashboardPage(driver, wait);
+        dashboardPage.assertDashboardIsVisible();
     }
 }
