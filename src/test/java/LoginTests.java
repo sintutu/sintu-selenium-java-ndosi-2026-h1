@@ -1,12 +1,18 @@
+import org.openqa.selenium.WebDriver;
 import pages.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LoginTests extends TestBase {
+public class LoginTests {
+    private WebDriver driver;
+
+    private final String baseUri = "https://ndosisimplifiedautomation.vercel.app/";
+
     @Test
     public void logIntoNdosiDevSite() throws InterruptedException {
+
 
         // Making page objects inside my tests is gross.
         HomePage homePage = new HomePage();
