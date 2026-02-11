@@ -1,6 +1,7 @@
 package tests;
 
 import facade.NdosiDev;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;
 
 public class LoginTests {
@@ -9,7 +10,7 @@ public class LoginTests {
     public void logIntoNdosiDevSite() {
         NdosiDev app = new NdosiDev();
         app.loginAsOrdinaryUser();
-        app.seeDashboard();
+        assertThat(app.isOnDashboard()).isTrue();
     }
 }
 

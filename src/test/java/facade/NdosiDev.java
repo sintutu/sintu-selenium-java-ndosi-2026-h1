@@ -35,8 +35,8 @@ public class NdosiDev {
         practicePage.clickLogin();
     }
 
-    public void seeDashboard(){
+    public boolean isOnDashboard(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.assertDashboardIsVisible();
+        return dashboardPage.isVisible();
     }
 }

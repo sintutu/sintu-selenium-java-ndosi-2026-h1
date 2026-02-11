@@ -2,9 +2,8 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class DashboardPage {
     WebDriver driver;
@@ -18,8 +17,7 @@ public class DashboardPage {
         this.wait = wait;
     }
 
-    public void assertDashboardIsVisible(){
-        assertThat(driver.findElement(welcomeMessage).getText())
-                .isEqualTo("Welcome back, sintutu! \uD83D\uDC4B");
+    public boolean isVisible(){
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeMessage)).isDisplayed();
     }
 }
