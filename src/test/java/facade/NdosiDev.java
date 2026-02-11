@@ -1,3 +1,27 @@
+/*
+ * PURPOSE:
+ * Represents a running instance of the Ndosi application as experienced by a user.
+ *
+ * This class owns the browser session lifecycle.
+ *
+ * RESPONSIBILITY:
+ * - Create and destroy WebDriver.
+ * - Orchestrate user-level behaviours (e.g. login).
+ * - Interpret page observations into domain-level answers.
+ *
+ * DOES NOT:
+ * - Expose WebDriver.
+ * - Expose page objects.
+ * - Contain raw locators.
+ * - Perform low-level Selenium interactions directly.
+ *
+ * Pages handle mechanics.
+ * The facade handles behaviour sequencing.
+ * Tests handle assertions.
+ *
+ * One instance = one user story execution.
+ */
+
 package facade;
 
 import org.openqa.selenium.WebDriver;
@@ -9,7 +33,7 @@ import pages.PracticePage;
 
 import java.time.Duration;
 
-public class NdosiDev {
+public class NdosiDev implements AutoCloseable{
     WebDriver driver;
     WebDriverWait wait;
 
@@ -39,4 +63,10 @@ public class NdosiDev {
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         return dashboardPage.isVisible();
     }
+
+    @Override
+    public void close() {
+        driver.quit();
+    }
+
 }

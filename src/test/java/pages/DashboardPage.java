@@ -1,3 +1,20 @@
+/*
+ * PURPOSE:
+ * Encapsulates DOM interactions specific to the Dashboard page.
+ *
+ * RESPONSIBILITY:
+ * - Observe dashboard-specific signals (e.g. welcome message).
+ * - Wait for elements that indicate the page is loaded.
+ *
+ * DOES NOT:
+ * - Perform assertions.
+ * - Decide whether login succeeded.
+ * - Know about user roles or scenarios.
+ *
+ * This class reports facts about the UI.
+ * The facade interprets those facts.
+ */
+
 package pages;
 
 import org.openqa.selenium.By;

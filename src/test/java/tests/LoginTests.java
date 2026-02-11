@@ -1,3 +1,27 @@
+/*
+ * PURPOSE:
+ * This class expresses user-visible behaviour as executable specifications.
+ *
+ * RESPONSIBILITY:
+ * - Describe scenarios in business language.
+ * - Call high-level behaviours on NdosiDev (the application facade).
+ * - Perform assertions explicitly.
+ *
+ * DOES NOT:
+ * - Create or manage WebDriver.
+ * - Interact with Selenium APIs.
+ * - Instantiate page objects.
+ * - Perform waits.
+ * - Know about routing, locators, or DOM structure.
+ *
+ * If you need Selenium mechanics, go to:
+ * - NdosiDev (for behaviour orchestration)
+ * - Page objects (for DOM interaction)
+ *
+ * Tests assert outcomes.
+ * Tests do not implement mechanics.
+ */
+
 package tests;
 
 import facade.NdosiDev;
@@ -8,22 +32,9 @@ public class LoginTests {
 
     @Test
     public void logIntoNdosiDevSite() {
-        NdosiDev app = new NdosiDev();
-        app.loginAsOrdinaryUser();
-        assertThat(app.isOnDashboard()).isTrue();
+        try (NdosiDev app = new NdosiDev()) {
+            app.loginAsOrdinaryUser();
+            assertThat(app.isOnDashboard()).isTrue();
+        }
     }
 }
-
-/*
-* https://ndosisimplifiedautomation.vercel.app is confusing.
-* Is it using pages?
-* I'm organising my locators by pages
-* Yet things look like /#overview, /#practice, /#dashboard
-* Are these pages? Does the page object model apply?
-*
-* Asserts are hard to understand.
-* I was typing in assert and I didn't see a problem in the IDE.
-* I had to google to find testNG asserts until I found I should have used Assert.
-*
-* Is the driver environment a whole browser window? Am I spinning up a whole new, RAM-hungry, Chrome window?
-* */

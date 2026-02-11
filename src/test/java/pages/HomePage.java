@@ -1,3 +1,23 @@
+/*
+ * PURPOSE:
+ * Encapsulates DOM interactions specific to the Home page.
+ *
+ * RESPONSIBILITY:
+ * - Locate elements.
+ * - Perform clicks and input.
+ * - Observe page-specific state.
+ * - Handle waiting for its own elements.
+ *
+ * DOES NOT:
+ * - Contain assertions.
+ * - Manage WebDriver lifecycle.
+ * - Coordinate flows across multiple pages.
+ * - Represent business scenarios.
+ *
+ * Pages answer questions and perform actions.
+ * They do not interpret business meaning.
+ */
+
 package pages;
 
 import org.openqa.selenium.By;
