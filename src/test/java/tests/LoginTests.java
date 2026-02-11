@@ -1,16 +1,9 @@
 package tests;
 
-import org.openqa.selenium.WebDriver;
-import pages.*;
 import facade.NdosiDev;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class LoginTests {
-    private WebDriver driver;
-
-    private final String baseUri = "https://ndosisimplifiedautomation.vercel.app/";
 
     @Test
     public void logIntoNdosiDevSite() {
