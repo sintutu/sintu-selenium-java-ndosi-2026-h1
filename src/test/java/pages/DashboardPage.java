@@ -22,12 +22,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class DashboardPage {
-    WebDriver driver;
-    WebDriverWait wait;
+class DashboardPage {
+    // Declare these as private final so that the passed in driver and waits
+    //  are not mutated inside this class
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
     // Dashboard page locators
-    public final By welcomeMessage = By.xpath("//h2[contains(.,'Welcome back, sintutu! \uD83D\uDC4B')]");
+    private final By welcomeMessage = By.xpath("//h2[contains(.,'Welcome back, sintutu! \uD83D\uDC4B')]");
 
     public DashboardPage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;

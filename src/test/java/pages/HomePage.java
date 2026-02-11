@@ -24,12 +24,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage {
-    WebDriver driver;
-    WebDriverWait wait;
+class HomePage {
+    // Declare these as private final so that the passed in driver and waits
+    //  are not mutated inside this class
+    private final WebDriver driver;
+    private final WebDriverWait wait;
     // Home page locators
-    public final By heading = By.xpath("//h1[contains(.,'Master Test Automation')]");
-    public final By loginButton = By.xpath("//button[contains(.,'Login')]");
+    private final By heading = By.xpath("//h1[contains(.,'Master Test Automation')]");
+    private final By loginButton = By.xpath("//button[contains(.,'Login')]");
 
     public HomePage(WebDriver driver, WebDriverWait wait){
         this.driver = driver;

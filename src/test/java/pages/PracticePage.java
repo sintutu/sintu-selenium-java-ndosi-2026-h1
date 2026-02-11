@@ -4,16 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PracticePage {
-    WebDriver driver;
-    WebDriverWait wait;
+class PracticePage {
+    // Declare these as private final so that the passed in driver and waits
+    //  are not mutated inside this class
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
     // Practice page locators
-    public final By loginEmail = By.id("login-email");
-    public final String username = "sintutu@dev.com";
-    public final By loginPassword = By.id("login-password");
-    public final String password = "@987654321";
-    public final By loginButton = By.id("login-submit");
+    private final By loginEmail = By.id("login-email");
+    private final String username = "sintutu@dev.com";
+    private final By loginPassword = By.id("login-password");
+    private final String password = "@987654321";
+    private final By loginButton = By.id("login-submit");
 
     public PracticePage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;

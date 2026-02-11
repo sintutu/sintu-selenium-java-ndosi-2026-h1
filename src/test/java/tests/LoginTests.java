@@ -24,9 +24,10 @@
 
 package tests;
 
-import facade.NdosiDev;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;
+
+import pages.NdosiDev;
 
 public class LoginTests {
 
