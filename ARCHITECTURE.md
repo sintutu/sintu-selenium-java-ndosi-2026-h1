@@ -19,6 +19,7 @@ Each layer has a strict responsibility.
 Tests:
 * Describe user-visible scenarios.
 * Call high-level behaviour methods.
+* Tests specify the browsers used.
 * Perform assertions explicitly.
 * Never reference Selenium APIs.
 * Never create WebDriver.
@@ -29,10 +30,8 @@ Example:
 ```java
 @Test
 public void logIntoNdosiDevSite() {
-    try (NdosiDev app = new NdosiDev()) {
-        app.loginAsOrdinaryUser();
-        assertThat(app.isOnDashboard()).isTrue();
-    }
+    app.loginAsOrdinaryUser();
+    assertThat(app.isOnDashboard()).isTrue();
 }
 ```
 
@@ -41,9 +40,13 @@ Tests are executable specifications.
 They assert outcomes.
 They do not implement behaviour.
 
-### 2. Application Facade (NdosiDev)
+Tests trigger the start and end of the lifecycle as a user would.
 
-The `NdosiDev` class represents:
+This is via the `TestBase` class that only calls the lifecycle owner before and after tests.
+
+### 2. Application Facade (Harness)
+
+The `Harness` class represents:
 
 > A running instance of the application as experienced by a user.
 
@@ -78,9 +81,12 @@ public void loginAsOrdinaryUser(){
 }
 ```
 
-One `NdosiDev` instance represents one scenario execution.
+One `Harness` instance represents one scenario execution.
 
-It implements `AutoCloseable` to guarantee browser cleanup.
+It implements `AutoCloseable`. This signals that the harness is responsible to close.
+That said, since the implementation of TestNG lifecycle hook `@AfterMethod` this closing is happening there. 
+This signal says, whichever test runner is used, closing the lifecycle must happen in the harness. 
+Reverting to try-with-resources is available.
 
 ### 3. Page Objects (Mechanics Layer)
 
@@ -106,7 +112,6 @@ public boolean isVisible(){
 }
 ```
 
-
 Pages report UI state.
 
 They do not decide what that state means.
@@ -117,7 +122,7 @@ Direction of dependency:
 
 > Test  
 > ↓  
-> Facade (NdosiDev)  
+> Harness  
 > ↓  
 > Page Objects  
 > ↓  
@@ -129,11 +134,11 @@ Selenium never leaks upward.
 
 ## Lifecycle Ownership
 
-`NdosiDev` owns:
-* Driver creation
+`Harness` owns:
+* Driver instantiation via DriverFactory
 * Wait creation
 * Navigation to base URI
-* Browser teardown
+* (Optionally) Browser teardown
 
 ```java
 @Override
@@ -144,13 +149,13 @@ public void close() {
 }
 ```
 
-Tests use try-with-resources to ensure cleanup:
+Tests may use try-with-resources to ensure cleanup:
 ```java
-try (NdosiDev app = new NdosiDev()) {
+try (Harness app = new Harness()) {
 ...
 }
 ```
-This guarantees deterministic teardown.
+This allows deterministic teardown. Though this is already available in TestBase.
 
 ## Design Goals
 
@@ -167,7 +172,6 @@ This structure optimises for:
 Current intentional tradeoffs:
 * Page objects are instantiated per call (simple, stateless model).
 * Credentials are embedded in page object (acceptable for demo, not production).
-* ChromeDriver is created directly (can be abstracted later).
 * No dependency injection framework (intentionally avoided for clarity).
 
 * This architecture favours explicit ownership over abstraction.
@@ -175,7 +179,6 @@ Current intentional tradeoffs:
 ## Extension Points
 
 Future improvements may include:
-* Driver factory abstraction
 * Environment configuration
 * Test data injection
 * Role-based login strategies

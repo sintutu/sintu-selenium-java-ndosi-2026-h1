@@ -4,7 +4,7 @@
  *
  * RESPONSIBILITY:
  * - Describe scenarios in business language.
- * - Call high-level behaviours on NdosiDev (the application facade).
+ * - Call high-level behaviours on Harness (the application facade).
  * - Perform assertions explicitly.
  *
  * DOES NOT:
@@ -15,7 +15,7 @@
  * - Know about routing, locators, or DOM structure.
  *
  * If you need Selenium mechanics, go to:
- * - NdosiDev (for behaviour orchestration)
+ * - Harness (for behaviour orchestration)
  * - Page objects (for DOM interaction)
  *
  * Tests assert outcomes.
@@ -27,15 +27,16 @@ package tests;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;
 
-import ui.Harness;
-
-public class LoginTests {
+public class LoginTests extends TestBase {
 
     @Test
-    public void logIntoNdosiDevSite() {
-        try (Harness app = new Harness()) {
-            app.loginAsOrdinaryUser();
+    public void logIntoNdosiDevSite() throws InterruptedException {
+        System.out.println(
+                "Thread: " + Thread.currentThread().getName()
+        );
+        Thread.sleep(5000);
+
+        app.loginAsOrdinaryUser();
             assertThat(app.isOnDashboard()).isTrue();
-        }
     }
 }

@@ -1,6 +1,6 @@
 /*
  * PURPOSE:
- * Represents a running instance of the Ndosi application as experienced by a user.
+ * This test harness represents a running instance of the Ndosi application as experienced by a user.
  *
  * This class owns the browser session lifecycle.
  *
@@ -24,10 +24,10 @@
 
 package ui;
 
+import infrastructure.Browser;
+import infrastructure.DriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class Harness implements AutoCloseable{
@@ -36,9 +36,9 @@ public class Harness implements AutoCloseable{
 
     private final String baseUri = "https://ndosisimplifiedautomation.vercel.app/";
 
-    public Harness(){
+    public Harness(Browser browser, boolean isHeadless){
         // Initialise driver and wait
-        driver = new ChromeDriver();
+        driver = DriverFactory.create(browser,isHeadless);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         // Get the application running
