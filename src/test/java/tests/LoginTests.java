@@ -27,13 +27,13 @@ package tests;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;
 
-import pages.NdosiDev;
+import ui.Harness;
 
 public class LoginTests {
 
     @Test
     public void logIntoNdosiDevSite() {
-        try (NdosiDev app = new NdosiDev()) {
+        try (Harness app = new Harness()) {
             app.loginAsOrdinaryUser();
             assertThat(app.isOnDashboard()).isTrue();
         }

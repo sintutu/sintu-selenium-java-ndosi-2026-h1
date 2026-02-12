@@ -18,7 +18,7 @@
  * They do not interpret business meaning.
  */
 
-package pages;
+package ui;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

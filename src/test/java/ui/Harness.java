@@ -22,7 +22,7 @@
  * One instance = one user story execution.
  */
 
-package pages;
+package ui;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,13 +30,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class NdosiDev implements AutoCloseable{
+public class Harness implements AutoCloseable{
     private final WebDriver driver;
     private final WebDriverWait wait;
 
     private final String baseUri = "https://ndosisimplifiedautomation.vercel.app/";
 
-    public NdosiDev(){
+    public Harness(){
         // Initialise driver and wait
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
