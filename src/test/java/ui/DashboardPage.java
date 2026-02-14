@@ -23,20 +23,21 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 class DashboardPage {
-    // Declare these as private final so that the passed in driver and waits
-    //  are not mutated inside this class
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+  // Declare these as private final so that the passed in driver and waits
+  //  are not mutated inside this class
+  private final WebDriver driver;
+  private final WebDriverWait wait;
 
-    // Dashboard page locators
-    private final By welcomeMessage = By.xpath("//h2[contains(.,'Welcome back, sintutu! \uD83D\uDC4B')]");
+  // Dashboard page locators
+  private final By welcomeMessage =
+      By.xpath("//h2[contains(.,'Welcome back, sintutu! \uD83D\uDC4B')]");
 
-    public DashboardPage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
-    }
+  public DashboardPage(WebDriver driver, WebDriverWait wait) {
+    this.driver = driver;
+    this.wait = wait;
+  }
 
-    public boolean isVisible(){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeMessage)).isDisplayed();
-    }
+  public boolean isVisible() {
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeMessage)).isDisplayed();
+  }
 }

@@ -25,18 +25,14 @@
 package tests;
 
 import static org.assertj.core.api.Assertions.assertThat;
+
 import org.testng.annotations.Test;
 
 public class LoginTests extends TestBase {
 
-    @Test
-    public void logIntoNdosiDevSite() throws InterruptedException {
-        System.out.println(
-                "Thread: " + Thread.currentThread().getName()
-        );
-        Thread.sleep(5000);
-
-        app.loginAsOrdinaryUser();
-            assertThat(app.isOnDashboard()).isTrue();
-    }
+  @Test
+  public void logIntoNdosiDevSite() {
+    app.loginAsOrdinaryUser();
+    assertThat(app.isOnDashboard()).isTrue();
+  }
 }

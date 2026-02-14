@@ -1,21 +1,21 @@
 /*
-* TestBase is dangerous in many automation projects because:
-* - People put logic in it.
-* - People start inheriting behaviour.
-* - It becomes a dumping ground.
-* - It becomes a framework.
-* This violates the architecture principles.
-*
-* TestBase should only:
-* - Create Harness
-* - Destroy Harness
-*
-* Nothing else.
-*
-* No helper methods.
-* No login methods.
-* No browser logic.
-* No test data.
+ * TestBase is dangerous in many automation projects because:
+ * - People put logic in it.
+ * - People start inheriting behaviour.
+ * - It becomes a dumping ground.
+ * - It becomes a framework.
+ * This violates the architecture principles.
+ *
+ * TestBase should only:
+ * - Create Harness
+ * - Destroy Harness
+ *
+ * Nothing else.
+ *
+ * No helper methods.
+ * No login methods.
+ * No browser logic.
+ * No test data.
  */
 
 package tests;
@@ -28,21 +28,20 @@ import org.testng.annotations.Parameters;
 import ui.Harness;
 
 public abstract class TestBase {
-    protected Harness app;
-    private Browser browser;
+  protected Harness app;
+  private Browser browser;
 
-    @Parameters("browser")
-    @BeforeMethod
-    public void setUp(@Optional("CHROME") String browserName){
-        browser = Browser.valueOf(browserName);
-        System.out.println(browserName);
-        app = new Harness(browser, false);
-    }
+  @Parameters("browser")
+  @BeforeMethod
+  public void setUp(@Optional("CHROME") String browserName) {
+    browser = Browser.valueOf(browserName);
+    app = new Harness(browser, false);
+  }
 
-    @AfterMethod
-    public void tearDown(){
-        if (app != null){
-            app.close();
-        }
+  @AfterMethod
+  public void tearDown() {
+    if (app != null) {
+      app.close();
     }
+  }
 }

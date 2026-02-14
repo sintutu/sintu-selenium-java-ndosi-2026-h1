@@ -26,45 +26,44 @@ package ui;
 
 import infrastructure.Browser;
 import infrastructure.DriverFactory;
+import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 
-public class Harness implements AutoCloseable{
-    private final WebDriver driver;
-    private final WebDriverWait wait;
+public class Harness implements AutoCloseable {
+  private final WebDriver driver;
+  private final WebDriverWait wait;
 
-    private final String baseUri = "https://ndosisimplifiedautomation.vercel.app/";
+  private final String baseUri = "https://ndosisimplifiedautomation.vercel.app/";
 
-    public Harness(Browser browser, boolean isHeadless){
-        // Initialise driver and wait
-        driver = DriverFactory.create(browser,isHeadless);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+  public Harness(Browser browser, boolean isHeadless) {
+    // Initialise driver and wait
+    driver = DriverFactory.create(browser, isHeadless);
+    wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        // Get the application running
-        driver.manage().window().maximize();
-        driver.get(baseUri);
+    // Get the application running
+    driver.manage().window().maximize();
+    driver.get(baseUri);
+  }
 
+  public void loginAsOrdinaryUser() {
+    HomePage homePage = new HomePage(driver, wait);
+    homePage.clickLogin();
+    PracticePage practicePage = new PracticePage(driver, wait);
+    practicePage.enterUsername();
+    practicePage.enterPassword();
+    practicePage.clickLogin();
+  }
+
+  public boolean isOnDashboard() {
+    DashboardPage dashboardPage = new DashboardPage(driver, wait);
+    return dashboardPage.isVisible();
+  }
+
+  @Override
+  public void close() {
+    if (driver != null) {
+      driver.quit();
     }
-
-    public void loginAsOrdinaryUser(){
-        HomePage homePage = new HomePage(driver, wait);
-        homePage.clickLogin();
-        PracticePage practicePage = new PracticePage(driver, wait);
-        practicePage.enterUsername();
-        practicePage.enterPassword();
-        practicePage.clickLogin();
-    }
-
-    public boolean isOnDashboard(){
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        return dashboardPage.isVisible();
-    }
-
-    @Override
-    public void close() {
-        if (driver != null){
-            driver.quit();
-        }
-    }
+  }
 }
