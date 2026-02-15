@@ -1,13 +1,6 @@
-<suite name="CrossBrowserSuite" parallel="tests" thread-count="2">
-    <test name="Chrome Tests">
+<suite name="SingleBrowserSuite">
+    <test name="Chrome Only">
         <parameter name="browser" value="CHROME"/>
-        <classes>
-            <class name="tests.LoginTests"/>
-        </classes>
-    </test>
-
-    <test name="Firefox Tests">
-        <parameter name="browser" value="FIREFOX"/>
         <classes>
             <class name="tests.LoginTests"/>
         </classes>

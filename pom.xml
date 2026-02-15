@@ -27,6 +27,7 @@
                 </configuration>
             </plugin>
 
+            <!-- Runs Checkstyle during validate phase -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -46,6 +47,7 @@
                 </executions>
             </plugin>
 
+            <!-- Code formatting plugin -->
             <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
@@ -85,21 +87,21 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Source: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-checkstyle-plugin</artifactId>
-            <version>3.6.0</version>
-            <scope>compile</scope>
-        </dependency>
+<!--        &lt;!&ndash; Source: https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-checkstyle-plugin &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.maven.plugins</groupId>-->
+<!--            <artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--            <version>3.6.0</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
 
-        <!-- Source: https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-maven-plugin -->
-        <dependency>
-            <groupId>com.diffplug.spotless</groupId>
-            <artifactId>spotless-maven-plugin</artifactId>
-            <version>3.2.1</version>
-            <scope>compile</scope>
-        </dependency>
+<!--        &lt;!&ndash; Source: https://mvnrepository.com/artifact/com.diffplug.spotless/spotless-maven-plugin &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.diffplug.spotless</groupId>-->
+<!--            <artifactId>spotless-maven-plugin</artifactId>-->
+<!--            <version>3.2.1</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
     </dependencies>
 
 </project>
